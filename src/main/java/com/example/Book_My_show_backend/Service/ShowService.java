@@ -35,6 +35,8 @@ public class ShowService {
         MovieEntity movie = movieRepository.findByMoviename(showRequestDto.getMoviename());
 
         TheaterEntity theater = theaterRepository.findById(showRequestDto.getTheaterid()).get();
+        showEntity.setMovie(movie);
+        showEntity.setTheater(theater);
 
         List<ShowSeatEntity> showSeatEntityList = createShowSeats(theater.getTheaterSeatEntityList());
 
@@ -44,17 +46,17 @@ public class ShowService {
         showEntity.setShowSeatEntityList(showSeatEntityList);
 
 
-        showEntity.setMovie(movie);
+
         List<ShowEntity> showEntityList = movie.getShowEntityList();
         showEntityList.add(showEntity);
         movie.setShowEntityList(showEntityList);
 
-        showEntity.setTheater(theater);
+
         List<ShowEntity> showEntityListt = theater.getShowEntityList();
         showEntityListt.add(showEntity);
         theater.setShowEntityList(showEntityListt);
 
-//        movieRepository.save(movie);
+        movieRepository.save(movie);
         theaterRepository.save(theater);
 
 //      showRepository.save(showEntity);
