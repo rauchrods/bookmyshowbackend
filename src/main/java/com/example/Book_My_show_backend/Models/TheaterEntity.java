@@ -1,12 +1,11 @@
 package com.example.Book_My_show_backend.Models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.EnableMBeanExport;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity

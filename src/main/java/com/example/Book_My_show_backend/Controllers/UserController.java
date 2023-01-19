@@ -1,6 +1,7 @@
 package com.example.Book_My_show_backend.Controllers;
 
 import com.example.Book_My_show_backend.Dtos.UserRequestDto;
+import com.example.Book_My_show_backend.Dtos.UserResponseDto;
 import com.example.Book_My_show_backend.Models.UserEntity;
 import com.example.Book_My_show_backend.Service.Userservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/findAll")
-    public List<UserEntity> findallUsers(){
+    public List<UserResponseDto> findallUsers(){
         return userservice.findallUsers();
     }
 }

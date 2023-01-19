@@ -1,6 +1,8 @@
 package com.example.Book_My_show_backend.Service;
 
+import com.example.Book_My_show_backend.Dtos.ShowByTimeRequestDto;
 import com.example.Book_My_show_backend.Dtos.ShowRequestDto;
+import com.example.Book_My_show_backend.Dtos.ShowResponseDto;
 import com.example.Book_My_show_backend.Models.*;
 import com.example.Book_My_show_backend.Repository.MovieRepository;
 import com.example.Book_My_show_backend.Repository.ShowRepository;
@@ -8,7 +10,6 @@ import com.example.Book_My_show_backend.Repository.ShowSeatRepository;
 import com.example.Book_My_show_backend.Repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +76,22 @@ public class ShowService {
         }
         showSeatRepository.saveAll(showSeatEntityList);
         return  showSeatEntityList;
+    }
+
+    public List<ShowResponseDto> findshowsBymovieidandtime(ShowByTimeRequestDto showByTimeRequestDto){
+
+       MovieEntity movie = movieRepository.findById(showByTimeRequestDto.getMovieid()).get();
+       List<ShowEntity> showEntityList = movie.getShowEntityList();
+       List<ShowResponseDto> showResponseDtoList  =new ArrayList<>();
+
+       for(ShowEntity showEntity: showEntityList){
+         if(showEntity.getShowDate().compareTo(showByTimeRequestDto.getShowdate())==0 && showEntity.getShowTime().compareTo(showByTimeRequestDto.getStarttime())==1
+                       && showEntity.getShowTime().compareTo(showByTimeRequestDto.getEndtime())==-1){
+             ShowResponseDto showResponseDto = ShowResponseDto.builder().showDate(showEntity.getShowDate())
+                     .showTime(showEntity.getShowTime()).build();
+             showResponseDtoList.add(showResponseDto);
+         }
+       }
+       return showResponseDtoList;
     }
 }

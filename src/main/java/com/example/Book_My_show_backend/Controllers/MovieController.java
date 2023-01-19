@@ -1,12 +1,12 @@
 package com.example.Book_My_show_backend.Controllers;
 
 import com.example.Book_My_show_backend.Dtos.MovieRequestDto;
+import com.example.Book_My_show_backend.Dtos.TheaterResponseDto;
 import com.example.Book_My_show_backend.Models.MovieEntity;
 import com.example.Book_My_show_backend.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,6 +31,11 @@ public class MovieController {
     @GetMapping("/findall")
     public List<MovieEntity> findAll(){
         return movieService.findAll();
+    }
+
+    @GetMapping("/getTheaterlist")
+    public  List<TheaterResponseDto> findtheatersbyMovie(@RequestParam("moviename") String moviename){
+        return movieService.findtheatersbyMovie(moviename);
     }
 
 }
