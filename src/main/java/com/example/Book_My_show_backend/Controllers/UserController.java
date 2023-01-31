@@ -31,4 +31,5 @@ public class UserController {
     public List<UserResponseDto> findallUsers(){
         return userservice.findallUsers();
     }
+
 }
